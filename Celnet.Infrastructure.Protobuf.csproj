@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+        <Nullable>enable</Nullable>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Title>Celnet.Infrastructure.Protobuf</Title>
+        <Description>API implementation of Celnet.Domain using Google Protocol Buffers</Description>
+        <Copyright>(c) 2023 Fabian Seidl</Copyright>
+        <PackageProjectUrl>https://github.com/skrax/Celnet.Infrastructure.Protobuf</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/skrax/Celnet.Infrastructure.Protobuf</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Celnet.Infrastructure.ENet" Version="1.0.0" />
+        <PackageReference Include="FluentValidation" Version="11.7.1" />
+        <PackageReference Include="Google.Protobuf" Version="3.24.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Domain\" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="README.md" Pack="true" PackagePath="\" />
+    </ItemGroup>
+
+</Project>

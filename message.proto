@@ -1,0 +1,31 @@
+syntax = "proto3";
+package celnet;
+
+option csharp_namespace = "Celnet.Protobuf.Domain";
+
+import "google/protobuf/any.proto";
+
+enum Method {
+  GET = 0;
+  POST = 1;
+  PUT = 2;
+  DELETE = 3;
+  EVENT = 4;
+}
+
+message Response {
+  string Id = 1;
+  string RequestId = 2;
+  string Route = 3;
+  uint32 Code = 4;
+  google.protobuf.Any Body = 5;
+}
+
+message Request {
+  string Id = 1;
+  string Route = 2;
+  Method Method = 3;
+  oneof Message {
+    google.protobuf.Any Body = 4;
+  }
+}
