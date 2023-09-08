@@ -1,0 +1,38 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: Publish Nuget
+
+on: workflow_dispatch
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    
+    - name: Restore dependencies
+      run: dotnet restore
+    
+    - name: Build
+      run: dotnet build --no-restore -c Release
+    
+    - name: Pack
+      run: dotnet pack -c Release
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3.1.2
+      with:
+        name: Celnet.Infrastructure.Protobuf.nupkg
+        path: ${{ github.workspace }}/bin/Release/*nupkg
+
+    - name: Publish on Nuget
+      working-directory: bin/Release
+      run: dotnet nuget push $(find *.nupkg) -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_API_KEY }}
